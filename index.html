@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merci — INRACE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e63030;
+      --red-dark: #b82424;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: #222222;
+      --text: #ffffff;
+      --muted: #888888;
+      --dim: #555555;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body {
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(230,48,48,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(230,48,48,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Red glow top */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(230,48,48,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top stripe */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 2rem; right: 2rem;
+      height: 2px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+
+    .logo-wrap {
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-wrap img {
+      height: 48px;
+      width: auto;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(230,48,48,0.12);
+      border: 1px solid rgba(230,48,48,0.3);
+      color: var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+
+    .badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.8s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 span { color: var(--red); }
+
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--red);
+      color: var(--text);
+      background: rgba(230,48,48,0.06);
+    }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      stroke: var(--red);
+    }
+
+    .cta {
+      display: block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      margin-bottom: 1.8rem;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .cta:active { transform: translateY(0); }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.4rem;
+    }
+
+    .rgpd {
+      font-size: 11px;
+      color: var(--dim);
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .rgpd strong {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .rgpd a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+
+    .rgpd a:hover { color: var(--text); }
+
+    .footer-logo {
+      margin-top: 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="logo-wrap">
+      <img src="https://inrace-vr.io/wp-content/uploads/2025/12/Logo-Noir-et-Rouge-protege-no-background-Photoroom-moyen-edited-1-300x169.png" alt="INRACE" />
+    </div>
+
+    <span class="badge">Envoi confirmé</span>
+
+    <h1>Merci pour<br>votre <span>participation</span></h1>
+
+    <p class="sub">
+      Vos réponses ont bien été enregistrées.<br>
+      Suivez INRACE pour vivre l'expérience immersive avant tout le monde.
+    </p>
+
+    <div class="socials">
+      <a class="social-btn" href="https://www.instagram.com/inrace_vr/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="#e63030" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+      <a class="social-btn" href="https://www.facebook.com/inrace" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+        Facebook
+      </a>
+      <a class="social-btn" href="https://www.youtube.com/@inrace_vr" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42A2.78 2.78 0 0 0 20.6 4.46C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="none" fill="#e63030"/>
+        </svg>
+        YouTube
+      </a>
+    </div>
+
+    <a class="cta" href="https://inrace-vr.io/" target="_blank" rel="noopener">
+      Découvrir l'expérience INRACE →
+    </a>
+
+    <hr class="divider" />
+
+    <p class="rgpd">
+      <strong>Données personnelles & RGPD</strong><br>
+      Les données collectées (nom, email, téléphone) sont traitées par INRACE en tant que responsable de traitement, sur la base de votre consentement, dans le but de traiter votre demande et de vous informer de nos actualités. Elles ne sont pas transmises à des tiers. Vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition conformément au RGPD.
+      <br><br>
+      Pour exercer vos droits : <a href="mailto:contact@inrace-vr.io">contact@inrace-vr.io</a> &nbsp;|&nbsp;
+      <a href="https://inrace-vr.io/privacy/" target="_blank" rel="noopener">Politique de confidentialité</a>
+    </p>
+
+    <p class="footer-logo">© 2026 INRACE — The Most Immersive Motorsport Experience</p>
+  </div>
+</body>
+</html>
